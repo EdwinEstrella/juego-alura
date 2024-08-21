@@ -2,7 +2,7 @@ let numeroSecreto = 0;
 let intentos = 0;
 let listaDeNumerosSorteados = [];
 let numeroMaximo = 10;
-
+let maximoIntentos = 6
 
 // asignar cualquier texto a un elemento
 function asignarTextoElemento(elemento, texto) {
@@ -10,8 +10,9 @@ function asignarTextoElemento(elemento, texto) {
     elementoHTML.innerHTML = texto;
     return;
 }
-// console.log(numeroSecreto)
-// Declaracion de funcion
+
+
+// Verificar intentos que el usuario ha iniciado
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
     if (numeroDeUsuario === numeroSecreto) {
@@ -25,6 +26,14 @@ function verificarIntento() {
             asignarTextoElemento('p', 'el numero es mayor');
         }
         intentos++;
+
+        // poner limite de intentos para el usuario
+        if (intentos >= maximoIntentos) {
+            asignarTextoElemento('p', `¡Has alcanzado el límite de intentos! El número secreto era ${numeroSecreto}.`);
+            document.getElementById('reiniciar').removeAttribute('disabled');
+        } else {
+            asignarTextoElemento('p', `Te quedan ${maximoIntentos - 1} intentos.`);
+        }
         limpiarCaja();
     }
     return;
@@ -32,6 +41,9 @@ function verificarIntento() {
 function limpiarCaja() {
     document.getElementById('valorUsuario').value = '';
 }
+
+
+// Funcion para generar un numero secreto
 function generarNumeroSecreto() {
     let numeroGenerado = Math.floor(Math.random() * numeroMaximo) + 1;
     // si ya sorteamos todos los numeros
@@ -48,12 +60,19 @@ function generarNumeroSecreto() {
         }
     }
 }
+
+// Estas son las condiciones iniciales para empezar desde 0
 function condicionesIniciales() {
     asignarTextoElemento('h1', 'Juego del numero secreto');
     asignarTextoElemento('p', `Escoje un número del 1 al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
     intentos = 1;
 }
+
+function intentosMaximos() {
+    maximoIntentos = 6
+}
+// Funcion para reiniciar el juego desde 0
 function reiniciarJuego() {
     // limpier la caja
     limpiarCaja();
