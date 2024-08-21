@@ -1,8 +1,8 @@
 let numeroSecreto = 0;
-let intentos = 3;
+let intentos = 0; // Inicializa el contador de intentos en 0
 let listaDeNumerosSorteados = [];
 let numeroMaximo = 10;
-let maximoIntentos = 6
+let maximoIntentos = 3 // Número inicial de intentos
 
 // asignar cualquier texto a un elemento
 function asignarTextoElemento(elemento, texto) {
@@ -16,14 +16,14 @@ function asignarTextoElemento(elemento, texto) {
 function verificarIntento() {
     let numeroDeUsuario = parseInt(document.getElementById('valorUsuario').value);
     if (numeroDeUsuario === numeroSecreto) {
-        asignarTextoElemento('p', `Bravo acertarte en ${intentos} ${(intentos === 1) ? "vez" : "veces"}`);
+        asignarTextoElemento('p', `Bravo acertarte en ${intentos + 1} ${(intentos + 1 === 1) ? "intento" : "intentos"}`);
         document.getElementById('reiniciar').removeAttribute('disabled');
     } else {
         // el usuario no acertó
         if (numeroDeUsuario > numeroSecreto) {
-            asignarTextoElemento('p', `el numero es menor`);
+            asignarTextoElemento('p', `el numero es menor, quedan ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
         } else {
-            asignarTextoElemento('p', 'el numero es mayor');
+            asignarTextoElemento('p', `el numero es mayor, quedan ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
         }
         intentos++;
 
@@ -31,9 +31,7 @@ function verificarIntento() {
         if (intentos >= maximoIntentos) {
             asignarTextoElemento('p', `¡Has alcanzado el límite de intentos! El número secreto era ${numeroSecreto}.`);
             document.getElementById('reiniciar').removeAttribute('disabled');
-        } else {
-            asignarTextoElemento('p', `Te quedan ${maximoIntentos - 1} intentos.`);
-        }
+        } 
         limpiarCaja();
     }
     return;
@@ -60,13 +58,12 @@ function generarNumeroSecreto() {
         }
     }
 }
-
 // Estas son las condiciones iniciales para empezar desde 0
 function condicionesIniciales() {
     asignarTextoElemento('h1', 'Juego del numero secreto');
     asignarTextoElemento('p', `Escoje un número del 1 al ${numeroMaximo}`);
     numeroSecreto = generarNumeroSecreto();
-    intentos = 1;
+    intentos = 0; // Reiniciar intentos a 0 al comenzar el juego
 }
 
 function intentosMaximos() {
