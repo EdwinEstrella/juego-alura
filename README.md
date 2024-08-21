@@ -3,5 +3,7 @@
 
 <h3>Este es mi primer proyecto en el curso de alura latam<h3>
 
+- estado del juego beta
+
 ![alt text](image.png)
 
