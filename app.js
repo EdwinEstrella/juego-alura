@@ -21,9 +21,9 @@ function verificarIntento() {
     } else {
         // el usuario no acertó
         if (numeroDeUsuario > numeroSecreto) {
-            asignarTextoElemento('p', `el numero es menor, quedan ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
+            asignarTextoElemento('p', `el numero es menor, ${(maximoIntentos - (intentos + 1) === 1) ? "queda" : "quedan"}  ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
         } else {
-            asignarTextoElemento('p', `el numero es mayor, quedan ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
+            asignarTextoElemento('p', `el numero es mayor, ${(maximoIntentos - (intentos + 1) === 1) ? "queda" : "quedan"} ${maximoIntentos - (intentos + 1)} ${(maximoIntentos - (intentos + 1) === 1) ? "intento" : "intentos"}`);
         }
         intentos++;
 
